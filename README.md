@@ -1,3 +1,5 @@
+# ⚡ دیتابیس ثبت احوال ایران
+این برنامه با دیتابیس لیک شده ثبت احوال به شما اجازه میده مشخصات افراد رو با شماره تلفن و ادرس و اسم جستجو کنید تا به تارگت مدنظرتون برسید + 20 میلیون مشخصات 
 # ⚡ IRData Explorer
 
 **IRData Explorer** is a modern Windows desktop application built for fast searching, filtering, and exploring large SQL Server databases through a clean graphical interface.
