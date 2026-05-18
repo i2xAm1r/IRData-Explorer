@@ -1,0 +1,15 @@
+{
+    "server": "localhost",
+    "databases": [
+        {
+            "name": "KDB_M",
+            "mdf_path": "D:\\2.Security & hack & Tools\\database-telegram\\database-telegram\\KDB_M.mdf",
+            "ldf_path": "D:\\2.Security & hack & Tools\\database-telegram\\database-telegram\\KDB_M.ldf"
+        },
+        {
+            "name": "KDB98_M",
+            "mdf_path": "D:\\2.Security & hack & Tools\\database-telegram\\database-telegram\\KDB98_M.mdf",
+            "ldf_path": "D:\\2.Security & hack & Tools\\database-telegram\\database-telegram\\KDB98_M.ldf"
+        }
+    ]
+}
