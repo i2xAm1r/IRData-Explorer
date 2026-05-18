@@ -34,7 +34,7 @@ It provides a simple and powerful interface for searching across multiple databa
 ## 📦 Requirements
 
 Before running IRData Explorer, make sure the following requirements are installed:
-
+- **first Download DataBase File check this link https://t.me/i2xAm1r for download the Leak DataBase For Iranian**
 - **Windows 10 / Windows 11**
 - **Microsoft SQL Server**
   - SQL Server Developer
