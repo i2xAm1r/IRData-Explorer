@@ -1,57 +1,70 @@
-# ⚡ دیتابیس ثبت احوال ایران
-این برنامه با دیتابیس لیک شده ثبت احوال به شما اجازه میده مشخصات افراد رو با شماره تلفن و ادرس و اسم جستجو کنید تا به تارگت مدنظرتون برسید + 20 میلیون مشخصات 
-# ⚡ IRData Explorer
+# ⚡ دیتابیس ثبت احوال ایران + آپدیت دیتابیس ایرانسل 
+این برنامه با دیتابیس لیک شده ثبت احوال و ایرانسل به شما اجازه میده مشخصات افراد رو با شماره تلفن و ادرس و اسم جستجو کنید تا به تارگت مدنظرتون برسید + 20 میلیون مشخصات
 
-**IRData Explorer** is a modern Windows desktop application built for fast searching, filtering, and exploring large SQL Server databases through a clean graphical interface.
+# ⚡ IRData Explorer v1.1.0
 
-The application is developed with **Python**, **PySide6**, and **Microsoft SQL Server**, and is designed to work with large `.mdf` / `.ldf` database files without requiring users to write SQL queries manually.
+🇺🇸 English
 
-It provides a simple and powerful interface for searching across multiple databases, filtering results instantly, exporting data, and working with large datasets in a user-friendly way.
+IRData Explorer is a modern Windows desktop application developed with Python, PySide6, and SQL Server for searching and exploring large Iranian databases through a simple graphical interface.
 
----
-
-## 🚀 Features
-
-- 🔎 **Fast Multi-Database Search**
-- 🗄️ **SQL Server MDF/LDF Database Support**
-- 📱 **Smart Phone Number Matching**
-- 🇮🇷 **Persian Text Normalization**
-- 🧠 **Search by Name, Phone, Code, PostCode, IDCode, Address and more**
-- 🧩 **Multiple Database Selection**
-- ⚡ **Live Filtering Inside Current Results**
-- 📋 **Copy Selected Record**
-- 📤 **Export Results to CSV**
-- 🖱️ **Double Click Record Details**
-- 🎨 **Default Dark Theme**
-- 🟢 **Hacker Green Theme**
-- ⚙️ **Config-based Database Management**
-- 🪟 **Windows EXE Build Support**
+The application supports SQL Server MDF/LDF databases and Microsoft Access MDB databases with fast searching, smart filtering, Persian text normalization, and phone number matching.
 
 ---
 
+# 🚀 Features
+
+* Fast multi-database search
+* SQL Server MDF/LDF support
+* Microsoft Access MDB support
+* Irancell database support
+* Smart phone number matching
+* Persian text normalization
+* Search by:
+
+  * Name
+  * Mobile
+  * Telephone
+  * Address
+  * IDCode
+  * PostCode
+* Live filtering inside results
+* Multiple database selection
+* Auto detect MDB tables
+* CSV export
+* Double click record details
+* Hacker Green Theme
+* Dark Theme
+* Config-based database management
+* Windows EXE support
+
+---
 ## 📸 Screenshots
 
 ![Main Dashboard](https://github.com/i2xAm1r/IRData-Explorer/blob/main/Screenshot%202026-05-18%20182539.png?raw=true)
+# 📥 Download Database Files
 
-## 📦 Requirements
+Download database files from Telegram:
 
-Before running IRData Explorer, make sure the following requirements are installed:
-- **first Download DataBase File check this link https://t.me/i2xAm1r for download the Leak DataBase For Iranian**
-- **Windows 10 / Windows 11**
-- **Microsoft SQL Server**
-  - SQL Server Developer
-  - or SQL Server Express
-- **SQL Server Management Studio (SSMS)**  
-  Optional, but recommended for manual database attach and troubleshooting.
+👉 t.me/i2xAm1r
 
-For development/building from source:
+---
 
-- Python 3.10+
-- PySide6
-- pyodbc
-- PyInstaller
+# 1️⃣ Requirements
 
-Install Python dependencies:
+Before running the application install:
+
+* Windows 10 / 11
+* Microsoft SQL Server
+
+  * SQL Server Express
+  * or SQL Server Developer
+* Microsoft Access Database Engine 2016 x64
+
+Optional:
+
+* SQL Server Management Studio (SSMS)
+
+Python packages (for source version):
 
 ```bash
 pip install PySide6 pyodbc pyinstaller
@@ -59,9 +72,41 @@ pip install PySide6 pyodbc pyinstaller
 
 ---
 
-## 🗄️ Database Setup
+# 2️⃣ Supported Database Types
 
-IRData Explorer works with SQL Server databases such as:
+IRData Explorer supports:
+
+## SQL Server Databases
+
+* KDB_M.mdf
+* KDB98_M.mdf
+
+These databases require SQL Server.
+
+## Access MDB Databases
+
+* 935_1.mdb
+* 935-2.mdb
+* 936.mdb
+* 937.mdb
+* 938.mdb
+* 939.mdb
+
+MDB databases do NOT require SQL Server.
+
+---
+
+# 🗄️ SQL Database Setup
+
+## Step 1 — Download Database Files
+
+First download the database files from Telegram:
+
+👉 t.me/i2xAm1r
+
+After downloading, extract the ZIP/RAR file.
+
+You should have files like these:
 
 ```text
 KDB_M.mdf
@@ -70,125 +115,378 @@ KDB98_M.mdf
 KDB98_M.ldf
 ```
 
-You can attach the databases manually using **SQL Server Management Studio**.
-
-### Manual Attach with SSMS
-
-1. Open **SQL Server Management Studio**
-2. Connect to your SQL Server instance
-3. Right click on **Databases**
-4. Click **Attach**
-5. Click **Add**
-6. Select the `.mdf` file
-7. SQL Server should automatically detect the `.ldf` file
-8. Click **OK**
-9. Repeat for other databases if needed
+These files are required for the application.
 
 ---
 
-## ⚙️ Configuration
+## Step 2 — Install SQL Server
 
-The application uses a `config.json` file to detect:
+Before using the application you must install:
 
-- SQL Server name
-- Database names
-- MDF file path
-- LDF file path
+- Microsoft SQL Server
+- SQL Server Express
+  or
+- SQL Server Developer
 
-`config.json` must be placed next to the `.exe` file.
+Optional but recommended:
+- SQL Server Management Studio (SSMS)
+
+---
+
+## Step 3 — Attach Database to SQL Server
+
+1. Open **SQL Server Management Studio (SSMS)**
+2. Connect to your SQL Server
+3. Right click on **Databases**
+4. Click **Attach**
+5. Click **Add**
+6. Select:
+
+```text
+KDB_M.mdf
+```
+
+7. SQL Server should automatically detect:
+
+```text
+KDB_M.ldf
+```
+
+8. Click **OK**
+
+Repeat the same steps for:
+
+```text
+KDB98_M.mdf
+```
+
+After attaching both databases, the application will connect automatically.
+
+---
+
+# 📁 Irancell MDB Databases
+
+Irancell databases with `.mdb` extension do NOT require SQL Server attach.
+
+You only need:
+
+- Microsoft Access Database Engine 2016 x64
+- Correct MDB paths inside `config.json`
 
 Example:
 
 ```json
 {
-    "server": "localhost",
-    "databases": [
-        {
-            "name": "KDB_M",
-            "mdf_path": "D:\\Database\\KDB_M.mdf",
-            "ldf_path": "D:\\Database\\KDB_M.ldf"
-        },
-        {
-            "name": "KDB98_M",
-            "mdf_path": "D:\\Database\\KDB98_M.mdf",
-            "ldf_path": "D:\\Database\\KDB98_M.ldf"
-        }
-    ]
+  "name": "Irancell:935",
+  "path": "D:\\MDB\\935_1.mdb"
 }
 ```
 
-### Important Path Note
+# 4️⃣ Configure config.json
 
-In JSON files, Windows paths must use double backslashes:
+Place `config.json` next to the EXE file.
+
+Example:
 
 ```json
-"D:\\Database\\KDB_M.mdf"
+{
+  "server": "localhost",
+
+  "databases": [
+    {
+      "name": "KDB_M",
+      "mdf_path": "D:\\Database\\KDB_M.mdf",
+      "ldf_path": "D:\\Database\\KDB_M.ldf"
+    },
+    {
+      "name": "KDB98_M",
+      "mdf_path": "D:\\Database\\KDB98_M.mdf",
+      "ldf_path": "D:\\Database\\KDB98_M.ldf"
+    }
+  ],
+
+  "access_databases": [
+    {
+      "name": "Irancell:935",
+      "path": "D:\\MDB\\935_1.mdb"
+    },
+    {
+      "name": "Irancell:935|2",
+      "path": "D:\\MDB\\935-2.mdb"
+    }
+  ]
+}
 ```
 
-Do **not** use single backslashes like this:
+Important:
+Windows paths must use double backslashes.
 
-```json
-"D:\Database\KDB_M.mdf"
+Correct:
+
+```text
+D:\\Database\\KDB_M.mdf
+```
+
+Wrong:
+
+```text
+D:\Database\KDB_M.mdf
 ```
 
 ---
 
-## 🖥️ Server Name Guide
+# 5️⃣ SQL Server Name
 
-If SQL Server is installed as the default instance:
+Default SQL Server:
 
 ```json
 "server": "localhost"
 ```
 
-If SQL Server Express is installed:
+SQL Express:
 
 ```json
 "server": "localhost\\SQLEXPRESS"
 ```
 
-If your SQL Server uses a custom instance name:
+Custom Instance:
 
 ```json
 "server": "DESKTOP-123ABC\\SQLEXPRESS"
 ```
 
-You can find the correct server name from the SSMS connection window.
-
 ---
 
-## 📁 Final Release Structure
-
-Keep the files like this:
+# 6️⃣ Final Folder Structure
 
 ```text
 IRDataExplorer/
 ├── IRDataExplorer.exe
 ├── config.json
+├── icon.ico
 └── Database/
-    ├── KDB_M.mdf
-    ├── KDB_M.ldf
-    ├── KDB98_M.mdf
-    └── KDB98_M.ldf
 ```
 
 ---
 
-## ⚠️ Troubleshooting
+# 7️⃣ Run Application
 
-If the app cannot connect to the database:
+Run:
 
-- Make sure SQL Server is installed
-- Make sure SQL Server service is running
-- Make sure `config.json` is next to the `.exe`
-- Make sure the server name is correct
-- Make sure MDF/LDF paths are correct
-- Make sure the database files were not moved after attach
-- Try running the app as Administrator
+```text
+IRDataExplorer.exe
+```
+
+If databases are already attached:
+
+* App connects automatically
+
+If not attached:
+
+* App tries auto attach using config.json paths
 
 ---
 
-## 📡 Social Media
+# 8️⃣ Troubleshooting
+
+If the application cannot connect:
+
+* Make sure SQL Server is running
+* Check config.json
+* Check MDF/LDF paths
+* Check MDB paths
+* Check server name
+* Run app as Administrator
+
+---
+
+# 🇮🇷 فارسی
+
+IRData Explorer یک برنامه دسکتاپ ویندوزی برای جستجو و مدیریت دیتابیس‌های بزرگ ایرانی است که با Python و PySide6 ساخته شده است.
+
+این برنامه از دیتابیس‌های:
+
+* SQL Server (MDF/LDF)
+* Access MDB
+
+پشتیبانی می‌کند و قابلیت جستجوی سریع، فیلتر زنده، جستجوی شماره موبایل و متن فارسی را دارد.
+
+---
+
+# 🚀 قابلیت‌ها
+
+* جستجوی سریع بین چند دیتابیس
+* پشتیبانی از MDF/LDF
+* پشتیبانی از MDB
+* پشتیبانی از دیتابیس‌های ایرانسل
+* جستجوی هوشمند شماره موبایل
+* جستجوی فارسی
+* جستجو بر اساس:
+
+  * نام
+  * موبایل
+  * تلفن
+  * آدرس
+  * کدملی
+  * کدپستی
+* فیلتر زنده نتایج
+* تشخیص خودکار Table فایل‌های MDB
+* خروجی CSV
+* تم Hacker Green
+* تم Dark
+* مدیریت دیتابیس با config.json
+* نسخه EXE ویندوز
+
+---
+## 📸 عکس برنامه
+
+![Main Dashboard](https://github.com/i2xAm1r/IRData-Explorer/blob/main/Screenshot%202026-05-18%20182539.png?raw=true)
+# 📥 دانلود دیتابیس
+
+دانلود دیتابیس‌ها از تلگرام:
+
+👉 t.me/i2xAm1r
+
+---
+
+# ⚙️ پیش‌نیازها
+
+قبل از اجرای برنامه نصب کنید:
+
+* Windows 10 / 11
+* Microsoft SQL Server
+* Microsoft Access Database Engine 2016 x64
+
+اختیاری:
+
+* SQL Server Management Studio
+
+---
+
+# 🗄️ # 🗄️ اتصال دیتابیس SQL
+
+## مرحله 1 — دانلود فایل‌های دیتابیس
+
+ابتدا فایل‌های دیتابیس را از تلگرام دانلود کنید:
+
+👉 t.me/i2xAm1r
+
+بعد از دانلود، فایل ZIP یا RAR را Extract کنید.
+
+باید فایل‌هایی مشابه این داشته باشید:
+
+```text
+KDB_M.mdf
+KDB_M.ldf
+KDB98_M.mdf
+KDB98_M.ldf
+```
+
+این فایل‌ها برای اجرای برنامه ضروری هستند.
+
+---
+
+## مرحله 2 — نصب SQL Server
+
+قبل از اجرای برنامه باید این موارد نصب باشند:
+
+- Microsoft SQL Server
+- SQL Server Express
+یا
+- SQL Server Developer
+
+اختیاری ولی پیشنهادی:
+- SQL Server Management Studio (SSMS)
+
+---
+
+## مرحله 3 — اتصال دیتابیس به SQL Server
+
+1. برنامه **SQL Server Management Studio (SSMS)** را باز کنید
+2. به SQL Server متصل شوید
+3. روی **Databases** راست کلیک کنید
+4. گزینه **Attach** را بزنید
+5. روی **Add** کلیک کنید
+6. فایل زیر را انتخاب کنید:
+
+```text
+KDB_M.mdf
+```
+
+7. SQL Server به‌صورت خودکار فایل زیر را شناسایی می‌کند:
+
+```text
+KDB_M.ldf
+```
+
+8. روی **OK** بزنید
+
+همین مراحل را برای فایل زیر نیز تکرار کنید:
+
+```text
+KDB98_M.mdf
+```
+
+بعد از Attach شدن دیتابیس‌ها، برنامه به‌صورت خودکار به آن‌ها متصل می‌شود.
+
+---
+
+# 📁 دیتابیس‌های MDB ایرانسل
+
+فایل‌های ایرانسل با پسوند `.mdb` نیازی به Attach داخل SQL Server ندارند.
+
+فقط کافیست:
+
+- Microsoft Access Database Engine 2016 x64 نصب باشد
+- مسیر فایل‌های MDB داخل `config.json` درست تنظیم شود
+
+مثال:
+
+```json
+{
+  "name": "Irancell:935",
+  "path": "D:\\MDB\\935_1.mdb"
+}
+```
+# 🛠 تنظیم config.json
+
+فایل config.json باید کنار exe باشد.
+
+داخل آن:
+
+* نام سرور SQL
+* مسیر دیتابیس‌ها
+* مسیر MDBها
+
+قرار می‌گیرد.
+
+---
+
+# ▶️ اجرای برنامه
+
+فایل زیر را اجرا کنید:
+
+```text
+IRDataExplorer.exe
+```
+
+اگر دیتابیس attach شده باشد:
+
+* برنامه مستقیم وصل می‌شود
+
+اگر attach نشده باشد:
+
+* برنامه سعی می‌کند خودکار attach کند
+
+---
+
+# ⚠️ رفع مشکل
+
+اگر برنامه وصل نشد:
+
+* SQL Server را بررسی کنید
+* config.json را بررسی کنید
+* مسیر دیتابیس‌ها را بررسی کنید
 
 [![Telegram](https://img.shields.io/badge/Telegram-Join-blue)](https://t.me/I2xAm1r)  
 [![Instagram](https://img.shields.io/badge/Instagram-Follow-red)](https://instagram.com/2xam1r)  
@@ -201,8 +499,3 @@ If the app cannot connect to the database:
 ## 👨‍💻 Developer
 
 Developed by **I2xAm1r**
-
-- GitHub: [I2xAm1r](https://github.com/I2xAm1r)
-- Telegram: [@I2xAm1r](https://t.me/I2xAm1r)
-
----
