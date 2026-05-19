@@ -19,6 +19,17 @@ from PySide6.QtGui import QGuiApplication
 CONFIG_FILE = "config.json"
 USERNAME = "I2xAm1r"
 
+SQL_COLUMNS = [
+    "Code", "FirstName", "LastName", "Name", "NamePrint",
+    "Title", "Tableau", "Tel", "Mobile", "PostCode",
+    "IDCode", "EconomicCode", "FatherName", "Address", "Address2"
+]
+
+ACCESS_FIELDS = [
+    "Field1", "Field2", "Field3", "Field4", "Field8",
+    "Field9", "Field11", "Field12", "Field13", "Field14"
+]
+
 COLUMNS = [
     "SourceDB",
     "Code",
@@ -46,7 +57,8 @@ def load_config():
 
 CONFIG = load_config()
 SERVER = CONFIG["server"]
-DATABASES = CONFIG["databases"]
+DATABASES = CONFIG.get("databases", [])
+ACCESS_DATABASES = CONFIG.get("access_databases", [])
 
 
 def clean_text(value):
@@ -103,6 +115,14 @@ def get_conn(database):
     )
 
 
+def get_access_conn(path):
+    return pyodbc.connect(
+        r"DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};"
+        rf"DBQ={path};",
+        timeout=5
+    )
+
+
 def get_master_conn():
     return pyodbc.connect(
         "DRIVER={SQL Server};"
@@ -126,11 +146,14 @@ def database_exists(db_name):
 
 def attach_database(db):
     db_name = db["name"]
-    mdf_path = db["mdf_path"]
-    ldf_path = db["ldf_path"]
+    mdf_path = db.get("mdf_path", "")
+    ldf_path = db.get("ldf_path", "")
 
     if database_exists(db_name):
         return True
+
+    if not mdf_path or not ldf_path:
+        return False
 
     try:
         conn = get_master_conn()
@@ -195,7 +218,7 @@ class DetailDialog(QDialog):
 class SearchApp(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Iranian DataBase Finder @i2xAm1r")
+        self.setWindowTitle("Iranian DataBase Finder @i2xAm1r v1.1.0")
         self.resize(1650, 850)
 
         self.all_rows = []
@@ -203,12 +226,19 @@ class SearchApp(QWidget):
 
         main_layout = QVBoxLayout()
 
-        title = QLabel("Iranian DataBase Finder")
+        title = QLabel("Iranian DataBase Finder v1.1.0")
         title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet(
             "font-size: 26px; font-weight: bold; margin: 10px;"
         )
         main_layout.addWidget(title)
+
+        subtitle = QLabel("دیتابیس ثبت احوال و ایرانسل")
+        subtitle.setAlignment(Qt.AlignCenter)
+        subtitle.setStyleSheet(
+            "font-size: 12px; color: #aaaaaa; margin-bottom: 12px;"
+        )
+        main_layout.addWidget(subtitle)
 
         creator_layout = QHBoxLayout()
 
@@ -239,7 +269,11 @@ class SearchApp(QWidget):
 
         self.database_box = QComboBox()
         self.database_box.addItem("All Databases")
+
         for db in DATABASES:
+            self.database_box.addItem(db["name"])
+
+        for db in ACCESS_DATABASES:
             self.database_box.addItem(db["name"])
 
         self.status_label = QLabel("Database Ready")
@@ -417,11 +451,11 @@ class SearchApp(QWidget):
 
             QTableWidget {
                 background-color: #000000;
-                color: #00ff66;
+                color: #ffffff;
                 gridline-color: #004d1f;
                 font-size: 13px;
                 selection-background-color: #003d18;
-                selection-color: white;
+                selection-color: #ffffff;
             }
 
             QHeaderView::section {
@@ -449,8 +483,17 @@ class SearchApp(QWidget):
     def selected_databases(self):
         selected = self.database_box.currentText()
 
+        sql_names = [db["name"] for db in DATABASES]
+        access_names = [db["name"] for db in ACCESS_DATABASES]
+
+        if selected == "KDB Package":
+            return sql_names
+
+        if selected == "Irancell Package":
+            return access_names
+
         if selected == "All Databases":
-            return [db["name"] for db in DATABASES]
+            return sql_names + access_names
 
         return [selected]
 
@@ -513,19 +556,9 @@ class SearchApp(QWidget):
                 params.append(p)
 
             for col in [
-                "Code",
-                "FirstName",
-                "LastName",
-                "Name",
-                "NamePrint",
-                "Title",
-                "Tableau",
-                "PostCode",
-                "IDCode",
-                "EconomicCode",
-                "FatherName",
-                "Address",
-                "Address2",
+                "Code", "FirstName", "LastName", "Name", "NamePrint",
+                "Title", "Tableau", "PostCode", "IDCode", "EconomicCode",
+                "FatherName", "Address", "Address2",
             ]:
                 where_parts.append(f"{col} LIKE ?")
                 params.append(normal_like)
@@ -537,21 +570,9 @@ class SearchApp(QWidget):
 
         query = f"""
         SELECT TOP 3000
-            Code,
-            FirstName,
-            LastName,
-            Name,
-            NamePrint,
-            Title,
-            Tableau,
-            Tel,
-            Mobile,
-            PostCode,
-            IDCode,
-            EconomicCode,
-            FatherName,
-            Address,
-            Address2
+            Code, FirstName, LastName, Name, NamePrint,
+            Title, Tableau, Tel, Mobile, PostCode,
+            IDCode, EconomicCode, FatherName, Address, Address2
         FROM tblCustomer
         WHERE {where_sql}
         ORDER BY Code
@@ -567,6 +588,79 @@ class SearchApp(QWidget):
             tuple([db_name] + [clean_text(v) for v in row])
             for row in rows
         ]
+
+    def search_access_database(self, db_info, keyword):
+        path = db_info["path"]
+        db_name = db_info["name"]
+
+        conn = get_access_conn(path)
+        cursor = conn.cursor()
+
+        # Auto detect table name: Xaaaa / Xaaae / ...
+        tables = [
+            row.table_name
+            for row in cursor.tables(tableType="TABLE")
+            if not row.table_name.startswith("MSys")
+        ]
+
+        if not tables:
+            conn.close()
+            return []
+
+        table_name = None
+
+        for t in tables:
+            if t.lower().startswith("xaa"):
+                table_name = t
+                break
+
+        if not table_name:
+            table_name = tables[0]
+
+        like = f"%{keyword}%"
+
+        where_parts = []
+        params = []
+
+        for field in ACCESS_FIELDS:
+            where_parts.append(f"[{field}] LIKE ?")
+            params.append(like)
+
+        where_sql = " OR ".join(where_parts)
+
+        query = f"""
+        SELECT TOP 300
+            [Field1], [Field2], [Field3], [Field4], [Field8],
+            [Field9], [Field11], [Field12], [Field13], [Field14]
+        FROM [{table_name}]
+        WHERE {where_sql}
+        """
+
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+        conn.close()
+
+        results = []
+
+        for row in rows:
+            values = [clean_text(v) for v in row]
+
+            if values and values[0] == "MOBL_NUM_VOICE_V":
+                continue
+
+            while len(values) < 10:
+                values.append("")
+
+            record = [
+                db_name,
+                values[0], values[1], values[2], values[3], values[4],
+                values[5], values[6], values[7], values[8], values[9],
+                "", "", "", "", "",
+            ]
+
+            results.append(tuple(record))
+
+        return results
 
     def search_database(self):
         keyword = self.search_input.text().strip()
@@ -584,9 +678,24 @@ class SearchApp(QWidget):
         errors = []
 
         for db_name in selected_dbs:
+            access_db = next(
+                (x for x in ACCESS_DATABASES if x["name"] == db_name),
+                None
+            )
+
+            if access_db:
+                try:
+                    results = self.search_access_database(access_db, keyword)
+                    all_results.extend(results)
+                except Exception as e:
+                    errors.append(f"{db_name}: {e}")
+                continue
+
             try:
                 results = self.search_one_database(
-                    db_name, keyword, search_type
+                    db_name,
+                    keyword,
+                    search_type
                 )
                 all_results.extend(results)
             except Exception as e:

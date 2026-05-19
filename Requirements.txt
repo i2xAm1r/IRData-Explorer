@@ -1,0 +1,341 @@
+# ⚡ IRData Explorer v1.1.0
+
+🇺🇸 English
+
+IRData Explorer is a modern Windows desktop application developed with Python, PySide6, and SQL Server for searching and exploring large Iranian databases through a simple graphical interface.
+
+The application supports SQL Server MDF/LDF databases and Microsoft Access MDB databases with fast searching, smart filtering, Persian text normalization, and phone number matching.
+
+---
+
+# 🚀 Features
+
+* Fast multi-database search
+* SQL Server MDF/LDF support
+* Microsoft Access MDB support
+* Irancell database support
+* Smart phone number matching
+* Persian text normalization
+* Search by:
+
+  * Name
+  * Mobile
+  * Telephone
+  * Address
+  * IDCode
+  * PostCode
+* Live filtering inside results
+* Multiple database selection
+* Auto detect MDB tables
+* CSV export
+* Double click record details
+* Hacker Green Theme
+* Dark Theme
+* Config-based database management
+* Windows EXE support
+
+---
+
+# 📥 Download Database Files
+
+Download database files from Telegram:
+
+👉 t.me/i2xAm1r
+
+---
+
+# 1️⃣ Requirements
+
+Before running the application install:
+
+* Windows 10 / 11
+* Microsoft SQL Server
+
+  * SQL Server Express
+  * or SQL Server Developer
+* Microsoft Access Database Engine 2016 x64
+
+Optional:
+
+* SQL Server Management Studio (SSMS)
+
+Python packages (for source version):
+
+```bash
+pip install PySide6 pyodbc pyinstaller
+```
+
+---
+
+# 2️⃣ Supported Database Types
+
+IRData Explorer supports:
+
+## SQL Server Databases
+
+* KDB_M.mdf
+* KDB98_M.mdf
+
+These databases require SQL Server.
+
+## Access MDB Databases
+
+* 935_1.mdb
+* 935-2.mdb
+* 936.mdb
+* 937.mdb
+* 938.mdb
+* 939.mdb
+
+MDB databases do NOT require SQL Server.
+
+---
+
+# 3️⃣ Attach SQL Databases
+
+For KDB databases:
+
+1. Open SSMS
+2. Right click Databases
+3. Click Attach
+4. Select `.mdf`
+5. Click OK
+
+Repeat for:
+
+* KDB_M
+* KDB98_M
+
+---
+
+# 4️⃣ Configure config.json
+
+Place `config.json` next to the EXE file.
+
+Example:
+
+```json
+{
+  "server": "localhost",
+
+  "databases": [
+    {
+      "name": "KDB_M",
+      "mdf_path": "D:\\Database\\KDB_M.mdf",
+      "ldf_path": "D:\\Database\\KDB_M.ldf"
+    },
+    {
+      "name": "KDB98_M",
+      "mdf_path": "D:\\Database\\KDB98_M.mdf",
+      "ldf_path": "D:\\Database\\KDB98_M.ldf"
+    }
+  ],
+
+  "access_databases": [
+    {
+      "name": "Irancell:935",
+      "path": "D:\\MDB\\935_1.mdb"
+    },
+    {
+      "name": "Irancell:935|2",
+      "path": "D:\\MDB\\935-2.mdb"
+    }
+  ]
+}
+```
+
+Important:
+Windows paths must use double backslashes.
+
+Correct:
+
+```text
+D:\\Database\\KDB_M.mdf
+```
+
+Wrong:
+
+```text
+D:\Database\KDB_M.mdf
+```
+
+---
+
+# 5️⃣ SQL Server Name
+
+Default SQL Server:
+
+```json
+"server": "localhost"
+```
+
+SQL Express:
+
+```json
+"server": "localhost\\SQLEXPRESS"
+```
+
+Custom Instance:
+
+```json
+"server": "DESKTOP-123ABC\\SQLEXPRESS"
+```
+
+---
+
+# 6️⃣ Final Folder Structure
+
+```text
+IRDataExplorer/
+├── IRDataExplorer.exe
+├── config.json
+├── icon.ico
+└── Database/
+```
+
+---
+
+# 7️⃣ Run Application
+
+Run:
+
+```text
+IRDataExplorer.exe
+```
+
+If databases are already attached:
+
+* App connects automatically
+
+If not attached:
+
+* App tries auto attach using config.json paths
+
+---
+
+# 8️⃣ Troubleshooting
+
+If the application cannot connect:
+
+* Make sure SQL Server is running
+* Check config.json
+* Check MDF/LDF paths
+* Check MDB paths
+* Check server name
+* Run app as Administrator
+
+---
+
+# 🇮🇷 فارسی
+
+IRData Explorer یک برنامه دسکتاپ ویندوزی برای جستجو و مدیریت دیتابیس‌های بزرگ ایرانی است که با Python و PySide6 ساخته شده است.
+
+این برنامه از دیتابیس‌های:
+
+* SQL Server (MDF/LDF)
+* Access MDB
+
+پشتیبانی می‌کند و قابلیت جستجوی سریع، فیلتر زنده، جستجوی شماره موبایل و متن فارسی را دارد.
+
+---
+
+# 🚀 قابلیت‌ها
+
+* جستجوی سریع بین چند دیتابیس
+* پشتیبانی از MDF/LDF
+* پشتیبانی از MDB
+* پشتیبانی از دیتابیس‌های ایرانسل
+* جستجوی هوشمند شماره موبایل
+* جستجوی فارسی
+* جستجو بر اساس:
+
+  * نام
+  * موبایل
+  * تلفن
+  * آدرس
+  * کدملی
+  * کدپستی
+* فیلتر زنده نتایج
+* تشخیص خودکار Table فایل‌های MDB
+* خروجی CSV
+* تم Hacker Green
+* تم Dark
+* مدیریت دیتابیس با config.json
+* نسخه EXE ویندوز
+
+---
+
+# 📥 دانلود دیتابیس
+
+دانلود دیتابیس‌ها از تلگرام:
+
+👉 t.me/i2xAm1r
+
+---
+
+# ⚙️ پیش‌نیازها
+
+قبل از اجرای برنامه نصب کنید:
+
+* Windows 10 / 11
+* Microsoft SQL Server
+* Microsoft Access Database Engine 2016 x64
+
+اختیاری:
+
+* SQL Server Management Studio
+
+---
+
+# 🗄️ اتصال دیتابیس SQL
+
+برای KDB:
+
+1. SSMS را باز کنید
+2. روی Databases راست کلیک کنید
+3. Attach را بزنید
+4. فایل MDF را انتخاب کنید
+5. OK را بزنید
+
+---
+
+# 🛠 تنظیم config.json
+
+فایل config.json باید کنار exe باشد.
+
+داخل آن:
+
+* نام سرور SQL
+* مسیر دیتابیس‌ها
+* مسیر MDBها
+
+قرار می‌گیرد.
+
+---
+
+# ▶️ اجرای برنامه
+
+فایل زیر را اجرا کنید:
+
+```text
+IRDataExplorer.exe
+```
+
+اگر دیتابیس attach شده باشد:
+
+* برنامه مستقیم وصل می‌شود
+
+اگر attach نشده باشد:
+
+* برنامه سعی می‌کند خودکار attach کند
+
+---
+
+# ⚠️ رفع مشکل
+
+اگر برنامه وصل نشد:
+
+* SQL Server را بررسی کنید
+* config.json را بررسی کنید
+* مسیر دیتابیس‌ها را بررسی کنید
+* برنامه را با Administrator اجرا کنید

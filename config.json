@@ -1,0 +1,57 @@
+{
+  "server": "localhost",
+  "databases": [
+    {
+      "name": "KDB_M",
+      "mdf_path": "C:\\X\\KDB_M.mdf",
+      "ldf_path": "C:\\X\\KDB_M.ldf"
+    },
+    {
+      "name": "KDB98_M",
+      "mdf_path": "C:\\X\\KDB98_M.mdf",
+      "ldf_path": "C:\\X\\KDB98_M.ldf"
+    }
+  ],
+  "access_databases": [
+    {
+      "name": "Irancell_935_1",
+      "path": "C:\\X\\935_1.mdb"
+    },
+    {
+      "name": "Irancell_935_2",
+      "path": "C:\\X\\935-2.mdb"
+    },
+    {
+      "name": "Irancell_936",
+      "path": "C:\\X\\936.mdb"
+    },
+    {
+      "name": "Irancell_936_2",
+      "path": "C:\\X\\936-2.mdb"
+    },
+    {
+      "name": "Irancell_937",
+      "path": "C:\\X\\937.mdb"
+    },
+    {
+      "name": "Irancell_937_2",
+      "path": "C:\\X\\937-2.mdb"
+    },
+    {
+      "name": "Irancell_938",
+      "path": "C:\\X\\938.mdb"
+    },
+    {
+      "name": "Irancell_938-2",
+      "path": "C:\\X\\938-2.mdb"
+    },
+    {
+      "name": "Irancell_939",
+      "path": "C:\\X\\939.mdb"
+    },
+    {
+      "name": "Irancell_939_2",
+      "path": "C:\\X\\939-2.mdb"
+    }
+  ]
+}
